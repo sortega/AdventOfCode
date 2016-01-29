@@ -1,6 +1,6 @@
 package advent
 
-object Day5 {
+object DayN {
 
   def part1(input: String): Int = ???
 

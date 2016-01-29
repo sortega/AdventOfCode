@@ -1,10 +1,14 @@
 package advent
 
-object Day5 {
+object Day8 {
 
   def part1(input: String): Int = ???
 
+  def decode(quotedString: String): String = ???
+
   def part2(input: String): Int = ???
+
+  def encode(quotedString: String): String = ???
 
   def main(args: Array[String]): Unit = {
     val input = ""

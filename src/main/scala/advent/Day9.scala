@@ -1,6 +1,10 @@
 package advent
 
-object Day5 {
+object Day9 {
+
+  object DistanceTable {
+    def parse(input: String) = ???
+  }
 
   def part1(input: String): Int = ???
 

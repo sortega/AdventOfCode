@@ -1,6 +1,8 @@
 package advent
 
-object Day5 {
+object Day10 {
+
+  def pronounce(number: String): String = ???
 
   def part1(input: String): Int = ???
 

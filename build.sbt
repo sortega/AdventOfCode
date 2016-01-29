@@ -10,6 +10,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
+  "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
   "org.scalaz" %% "scalaz-core" % "7.1.5",
   "org.scalacheck" %% "scalacheck" % "1.12.2" % "test",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"

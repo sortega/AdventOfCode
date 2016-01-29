@@ -2,9 +2,9 @@ package advent
 
 object Day1 {
 
-  def part1(input: String): Int = -1
+  def part1(input: String): Int = ???
 
-  def part2(input: String): Int = -1
+  def part2(input: String): Int = ???
 
   def main(args: Array[String]): Unit = {
     val basicInput = ""
