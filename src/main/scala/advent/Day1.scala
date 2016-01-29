@@ -2,9 +2,11 @@ package advent
 
 object Day1 {
 
-  def part1(input: String): Int = -1
+  val increments = Map('(' -> 1, ')' -> -1)
 
-  def part2(input: String): Int = -1
+  def part1(input: String): Int = input.map(increments).sum
+
+  def part2(input: String): Int = input.map(increments).scanLeft(0)(_ + _).indexOf(-1)
 
   def main(args: Array[String]): Unit = {
     val basicInput = ""
