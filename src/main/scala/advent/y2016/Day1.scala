@@ -28,19 +28,6 @@ object Day1 {
     private def parseAdvance(group: String) = AdvanceBy(group.toInt)
   }
 
-  case class Point(x: Int, y: Int) {
-    def +(other: Point): Point = Point(x + other.x, y + other.y)
-    def *(other: Point): Point = Point(x * other.x - y * other.y, x * other.y + y * other.x)
-    def turnRight: Point = this * Point(x = 0, y = -1)
-    def turnLeft: Point = this * Point(x = 0, y = 1)
-    def norm1: Int = x.abs + y.abs
-    def scaleBy(factor: Int): Point = Point(x * factor, y * factor)
-  }
-
-  object Point {
-    val Origin = Point(x = 0, y = 0)
-  }
-
   case class Context(position: Point, facing: Point, visited: Seq[Point] = Seq.empty) {
     def moveBy(instruction: Instruction): Context = instruction match {
       case Instruction.TurnLeft => copy(facing = facing.turnLeft)

@@ -9,6 +9,8 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots")
 )
 
+addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.0")
+
 libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
   "io.spray" %%  "spray-json" % "1.3.2",
