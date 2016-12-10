@@ -1,7 +1,5 @@
 package advent.y2016
 
-import scala.io.Source
-
 object Day3 {
 
   private def parse(line: String): Seq[Int] = line.split("\\s+").filterNot(_.isEmpty).map(_.toInt)
@@ -19,7 +17,7 @@ object Day3 {
   }
 
   def main(args: Array[String]): Unit = {
-    val input = Source.fromInputStream(getClass.getResourceAsStream("day3.input")).getLines().toSeq
+    val input = dailyResource(3).getLines().toSeq
     println("Part 1 result: " + part1(input))
     println("Part 2 result: " + part2(input))
   }

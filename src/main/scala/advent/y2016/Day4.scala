@@ -36,7 +36,7 @@ object Day4 {
     Room.parseAll(input).find(_.decrypt == "northpole object storage").get.id
 
   def main(args: Array[String]): Unit = {
-    val input = Source.fromInputStream(getClass.getResourceAsStream("day4.input")).mkString
+    val input = dailyResource(4).mkString
     println("Part 1 result: " + part1(input))
     println("Part 2 result: " + part2(input))
   }

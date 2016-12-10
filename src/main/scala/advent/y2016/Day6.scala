@@ -1,7 +1,5 @@
 package advent.y2016
 
-import scala.io.Source
-
 object Day6 {
 
   def part1(input: String): String =
@@ -22,7 +20,7 @@ object Day6 {
   def part2(input: String): String = columnsOf(input).map(leastFrequent).mkString
 
   def main(args: Array[String]): Unit = {
-    val input = Source.fromInputStream(getClass.getResourceAsStream("day6.input")).mkString
+    val input = dailyResource(6).mkString
     println("Part 1 result: " + part1(input))
     println("Part 2 result: " + part2(input))
   }
