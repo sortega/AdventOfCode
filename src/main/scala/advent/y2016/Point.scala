@@ -2,6 +2,7 @@ package advent.y2016
 
 case class Point(x: Int, y: Int) {
   def +(other: Point): Point = Point(x + other.x, y + other.y)
+  def -(other: Point): Point = Point(x - other.x, y - other.y)
   def *(other: Point): Point = Point(x * other.x - y * other.y, x * other.y + y * other.x)
   def turnRight: Point = this * Point(x = 0, y = -1)
   def turnLeft: Point = this * Point(x = 0, y = 1)
