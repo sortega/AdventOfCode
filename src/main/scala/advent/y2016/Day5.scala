@@ -1,24 +1,13 @@
 package advent.y2016
 
-import java.security.MessageDigest
 import scala.util.Try
 
 object Day5 {
 
-  private val digester = MessageDigest.getInstance("MD5")
-
-  private def md5(str: String): String = {
-    val hash = digester.digest(str.getBytes).map(_.formatted("%02X")).mkString
-    digester.reset()
-    hash
-  }
-
   private def leadingZeroes(hexHash: String): Int = hexHash.prefixLength(_ == '0')
 
-  private def doors(seed: String): Stream[String] = Stream.from(0).map(i => s"$seed$i")
-
   private def mine(seed: String, zeroes: Int) =
-    doors(seed).map(md5).filter(hash => leadingZeroes(hash) >= zeroes).map(_.toLowerCase)
+    Hash.md5Stream(seed).filter(hash => leadingZeroes(hash) >= zeroes)
 
   def part1(seed: String, zeroes: Int = 5, passwordSize: Int = 8): String =
     mine(seed, zeroes).map(_.apply(zeroes)).take(passwordSize).mkString
