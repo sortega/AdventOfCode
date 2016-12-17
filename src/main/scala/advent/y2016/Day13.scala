@@ -2,10 +2,8 @@ package advent.y2016
 
 class Day13(seed: Int) {
 
-  private val pointDeltas = Set(Point(1, 0), Point(0, 1), Point(-1, 0), Point(0, -1))
-
   private def adjacentPoints(point: Point): Set[Point] =
-    pointDeltas.map(_ + point).filter(p => (p.x >= 0) && (p.y >= 0) && openSpace(p))
+    point.adjacent.filter(p => (p.x >= 0) && (p.y >= 0) && openSpace(p))
 
   private def openSpace(point: Point): Boolean = {
     import point._
