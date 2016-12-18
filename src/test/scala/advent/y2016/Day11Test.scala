@@ -28,6 +28,4 @@ class Day11Test extends FlatSpec with ShouldMatchers {
   "Part 1" should "count the number of steps to completion" in {
     Day11.solve(testFactory) shouldBe 11
   }
-
-  "Part 2" should "???" in {}
 }

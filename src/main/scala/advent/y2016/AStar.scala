@@ -23,9 +23,8 @@ class AStar[Node](distance: (Node, Node) => Double,
     val closed = mutable.HashSet.empty[Node]
 
     // Paths being searched
-    val openQueue =
-      mutable.PriorityQueue[Node](start)(Ordering.by[Node, Double](node => -fScore(node)))
-    val openSet = mutable.HashSet.empty[Node]
+    val openQueue = mutable.PriorityQueue(start)(Ordering.by[Node, Double](node => -fScore(node)))
+    val openSet = mutable.HashSet(start)
 
     while (openQueue.nonEmpty) {
       val current = openQueue.dequeue()
@@ -37,14 +36,14 @@ class AStar[Node](distance: (Node, Node) => Double,
         for (neighbor <- neighbors(current) if !closed.contains(neighbor)) {
           val newGScore = gScore(current) + distance(current, neighbor)
 
-          if (!openSet.contains(neighbor)) {
-            openQueue.enqueue(neighbor)
-            openSet.add(neighbor)
-          }
           if (newGScore < gScore(neighbor)) {
             cameFrom.put(neighbor, current)
             gScore.put(neighbor, newGScore)
             fScore.put(neighbor, newGScore + heuristic(neighbor, goal))
+          }
+          if (!openSet.contains(neighbor)) {
+            openQueue.enqueue(neighbor)
+            openSet.add(neighbor)
           }
         }
       }
