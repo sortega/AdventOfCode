@@ -2,6 +2,8 @@ package advent.y2016
 
 object Day17 {
 
+  val Goal = Point(3, 3)
+
   case class State(pos: Point, path: String = "") {
     def adjacentStates(seed: String): Set[State] = {
       val hash = Hash.md5(seed + path)
@@ -20,7 +22,7 @@ object Day17 {
 
     private val isOpen = "bcdef".toSet
 
-    def isGoal: Boolean = pos == Point(3, 3)
+    def isGoal: Boolean = pos == Goal
 
     override def equals(obj: scala.Any): Boolean =
       obj match {
@@ -34,17 +36,16 @@ object Day17 {
 
   object State {
     val Initial = State(Point(0, 0))
-    val Goal = State(Point(3, 3))
   }
 
   class Solver(seed: String) {
 
-    private def heuristic(l: State, r: State): Double = (l.pos - r.pos).norm1
+    private def heuristic(state: State): Double = (state.pos - Goal).norm1
 
     private val searcher =
       new AStar[State](distance = (_, _) => 1, neighbors = _.adjacentStates(seed), heuristic)
 
-    def shortestPath: String = searcher.search(State.Initial, State.Goal).get.last.path
+    def shortestPath: String = searcher.search(State.Initial, _.isGoal).get.last.path
   }
 
   def part1(seed: String): String = new Solver(seed).shortestPath
@@ -52,7 +53,7 @@ object Day17 {
   def part2(seed: String): Int =
     BFS
       .traverse[State](State.Initial, _.adjacentStates(seed).filter(!_.isGoal))
-      .filter(_.last.adjacentStates(seed).contains(State.Goal))
+      .filter(_.last.adjacentStates(seed).exists(_.isGoal))
       .map(_.size)
       .max
 

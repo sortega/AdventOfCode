@@ -6,16 +6,16 @@ import scalaz.Scalaz.some
 
 class AStar[Node](distance: (Node, Node) => Double,
                   neighbors: Node => Set[Node],
-                  heuristic: (Node, Node) => Double) {
+                  heuristic: Node => Double) {
   type Path = List[Node]
 
-  def search(start: Node, goal: Node): Option[Path] = {
+  def search(start: Node, isGoal: Node => Boolean): Option[Path] = {
     // Cost of getting to a node from the starting point
     val gScore = mutable.Map(start -> 0d).withDefaultValue(Double.PositiveInfinity)
 
     // Estimated cost of getting to the goal from a point
     val fScore =
-      mutable.Map(start -> heuristic(start, goal)).withDefaultValue(Double.PositiveInfinity)
+      mutable.Map(start -> heuristic(start)).withDefaultValue(Double.PositiveInfinity)
 
     val cameFrom = mutable.Map.empty[Node, Node]
 
@@ -30,7 +30,7 @@ class AStar[Node](distance: (Node, Node) => Double,
       val current = openQueue.dequeue()
       openSet.remove(current)
 
-      if (current == goal) return Some(reconstructPath(cameFrom, current))
+      if (isGoal(current)) return Some(reconstructPath(cameFrom, current))
       else {
         closed += current
         for (neighbor <- neighbors(current) if !closed.contains(neighbor)) {
@@ -39,7 +39,7 @@ class AStar[Node](distance: (Node, Node) => Double,
           if (newGScore < gScore(neighbor)) {
             cameFrom.put(neighbor, current)
             gScore.put(neighbor, newGScore)
-            fScore.put(neighbor, newGScore + heuristic(neighbor, goal))
+            fScore.put(neighbor, newGScore + heuristic(neighbor))
           }
           if (!openSet.contains(neighbor)) {
             openQueue.enqueue(neighbor)

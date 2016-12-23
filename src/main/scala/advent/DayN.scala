@@ -1,5 +1,7 @@
 package advent
 
+import advent.y2016.timed
+
 object DayN {
 
   def part1(input: String): Int = ???
@@ -8,7 +10,7 @@ object DayN {
 
   def main(args: Array[String]): Unit = {
     val input = ""
-    println("Part 1 result: " + part1(input))
-    println("Part 2 result: " + part2(input))
+    timed(println("Part 1 result: " + part1(input)))
+    timed(println("Part 2 result: " + part2(input)))
   }
 }

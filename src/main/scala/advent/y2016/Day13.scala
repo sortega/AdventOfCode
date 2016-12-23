@@ -15,12 +15,6 @@ class Day13(seed: Int) {
 
   private def manhattanDistance(l: Point, r: Point): Double = (l - r).norm1
 
-  private val searcher = new AStar[Point](
-    distance = manhattanDistance,
-    neighbors = adjacentPoints,
-    heuristic = manhattanDistance
-  )
-
   private def printMap(rows: Int, cols: Int, path: Set[Point]): Unit = {
     (0 until rows).foreach { row =>
       (0 until cols).foreach { col =>
@@ -39,7 +33,13 @@ class Day13(seed: Int) {
   private val start = Point(1, 1)
 
   def part1: Int = {
-    val path = searcher.search(start, goal = Point(x = 31, y = 39)).get
+    val goal = Point(x = 31, y = 39)
+    val searcher = new AStar[Point](
+      distance = manhattanDistance,
+      neighbors = adjacentPoints,
+      heuristic = manhattanDistance(_, goal)
+    )
+    val path = searcher.search(start, _ == goal).get
     printMap(rows = 39, cols = 31, path.toSet)
     path.size - 1
   }
