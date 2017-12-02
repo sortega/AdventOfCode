@@ -1,8 +1,8 @@
 package advent
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class DayNTest extends FlatSpec with ShouldMatchers {
+class DayNTest extends FlatSpec with Matchers {
 
   "Part 1" should "???" in {
   }

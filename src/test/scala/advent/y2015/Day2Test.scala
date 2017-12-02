@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day2Test extends FlatSpec with ShouldMatchers {
+class Day2Test extends FlatSpec with Matchers {
 
   "Part 1 wrapping paper" should "compute the wrapping paper" in {
     Day2.part1("2x3x4") shouldBe 58

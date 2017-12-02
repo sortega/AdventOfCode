@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day19.{Configuration, Rule, Rules}
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day19Test extends FlatSpec with ShouldMatchers {
+class Day19Test extends FlatSpec with Matchers {
 
   val configuration =
     """H => HO

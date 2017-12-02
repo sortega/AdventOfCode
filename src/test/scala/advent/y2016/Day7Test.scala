@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day7Test extends FlatSpec with ShouldMatchers {
+class Day7Test extends FlatSpec with Matchers {
 
   "Part 1" should "count the number of ABBA-compliant strings" in {
     Day7.part1(Seq("abba[mnop]qrst")) shouldBe 1

@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day20Test extends FlatSpec with ShouldMatchers {
+class Day20Test extends FlatSpec with Matchers {
 
   "Primes" should "contain the sequence of primer numbers" in {
     Day20.primes.take(10) shouldBe Seq(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)

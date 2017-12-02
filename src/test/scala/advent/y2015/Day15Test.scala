@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day15.Ingredient
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day15Test extends FlatSpec with ShouldMatchers {
+class Day15Test extends FlatSpec with Matchers {
 
   "Breaking an amount in all possible partitions" should "produce an empty partition for 0 buckets" in {
     Day15.allPartitions(total = 0, buckets = 0) shouldBe Seq(Vector.empty)

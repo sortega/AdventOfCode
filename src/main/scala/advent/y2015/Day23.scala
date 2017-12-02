@@ -1,6 +1,7 @@
 package advent.y2015
 
 import scala.annotation.tailrec
+import scala.language.postfixOps
 import scala.util.parsing.combinator.RegexParsers
 import scalaz.syntax.std.boolean._
 

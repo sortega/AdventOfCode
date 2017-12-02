@@ -1,9 +1,9 @@
 package advent.y2016
 
 import advent.y2016.AssemblyBunny._
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day23Test extends FlatSpec with ShouldMatchers {
+class Day23Test extends FlatSpec with Matchers {
 
   private val initialListing =
     """cpy 2 a

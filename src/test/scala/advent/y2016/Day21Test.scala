@@ -3,9 +3,9 @@ package advent.y2016
 import scala.util.Random
 
 import advent.y2016.Day21._
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day21Test extends FlatSpec with ShouldMatchers {
+class Day21Test extends FlatSpec with Matchers {
 
   "Part 1" should "execute operations" in {
     Operation.SwapIndices(4, 0).apply("abcde") shouldBe "ebcda"

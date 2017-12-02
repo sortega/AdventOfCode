@@ -1,9 +1,7 @@
 package advent.y2016
 
-import scalaz._
-import Scalaz._
-import scala.collection.immutable.HashSet
 import scala.collection.parallel.immutable.ParSet
+import scalaz.Scalaz._
 
 object Day11 {
   sealed abstract class Floor(value: Int) extends Product {

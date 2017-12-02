@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day18Test extends FlatSpec with ShouldMatchers {
+class Day18Test extends FlatSpec with Matchers {
 
   "A trap automaton" should "be arbitrary extensible" in {
     Day18.trapAutomaton("..^^.").take(3).mkString("\n") shouldBe """..^^.

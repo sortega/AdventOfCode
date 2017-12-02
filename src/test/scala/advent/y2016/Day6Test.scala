@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day6Test extends FlatSpec with ShouldMatchers {
+class Day6Test extends FlatSpec with Matchers {
 
   private val sampleInput =
     """eedadn

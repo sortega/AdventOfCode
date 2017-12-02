@@ -34,6 +34,7 @@ object BFS {
         case (current :: path, remaining) =>
           val candidates = neighbors(current).map(node => node :: current :: path)
           ((current :: path).reverse, State(remaining.enqueue(candidates), state.seen + current))
+        case _ => ???
       }
     }
   }

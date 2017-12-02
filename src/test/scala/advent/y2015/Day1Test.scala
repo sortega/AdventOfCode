@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day1Test extends FlatSpec with ShouldMatchers {
+class Day1Test extends FlatSpec with Matchers {
 
   "Part 1 floor tracking" should "get to the 0 floor for the empty input" in {
     Day1.part1("") shouldBe 0

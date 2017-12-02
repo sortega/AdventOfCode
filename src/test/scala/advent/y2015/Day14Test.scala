@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day14.Reindeer
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day14Test extends FlatSpec with ShouldMatchers {
+class Day14Test extends FlatSpec with Matchers {
 
   "A reindeer spec" should "be parsed from string" in {
     Reindeer.parse(

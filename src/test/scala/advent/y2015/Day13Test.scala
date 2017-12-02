@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day13Test extends FlatSpec with ShouldMatchers {
+class Day13Test extends FlatSpec with Matchers {
 
   "Person preferences" should "be parsed from string" in {
     Day13.Preferences.parse(

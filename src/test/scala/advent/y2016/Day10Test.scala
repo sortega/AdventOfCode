@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day10Test extends FlatSpec with ShouldMatchers {
+class Day10Test extends FlatSpec with Matchers {
 
   val sampleCircuit =
     """value 5 goes to bot 2

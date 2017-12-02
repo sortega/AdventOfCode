@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day24Test extends FlatSpec with ShouldMatchers {
+class Day24Test extends FlatSpec with Matchers {
 
   "Listed subsets" should "be empty for the empty set" in {
     Day24.subsetsInAscendingSize(Set.empty) shouldBe 'empty

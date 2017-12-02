@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day8Test extends FlatSpec with ShouldMatchers {
+class Day8Test extends FlatSpec with Matchers {
 
   "String decoding" should "decode regular strings" in {
     Day8.decode("\"\"") shouldBe ""

@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day11Test extends FlatSpec with ShouldMatchers {
+class Day11Test extends FlatSpec with Matchers {
 
   "A password" should "be encoded as a number" in {
     Day11.toNumber("aaaaaaaa") shouldBe 0

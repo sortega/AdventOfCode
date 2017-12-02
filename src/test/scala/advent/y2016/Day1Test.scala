@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day1Test extends FlatSpec with ShouldMatchers {
+class Day1Test extends FlatSpec with Matchers {
 
   "Part 1" should "have distance 0 for empty instructions" in {
     Day1.part1("") shouldBe 0

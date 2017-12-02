@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day22Test extends FlatSpec with ShouldMatchers {
+class Day22Test extends FlatSpec with Matchers {
 
   "Part 1" should "count the number of viable pairs" in {
     Day22.part1("""/dev/grid/node-x0-y0     85T   64T    21T   75%

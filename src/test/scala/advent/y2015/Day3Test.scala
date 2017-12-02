@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day3Test extends FlatSpec with ShouldMatchers {
+class Day3Test extends FlatSpec with Matchers {
 
   "Part 1" should "track how many houses are visited" in {
     Day3.part1("") shouldBe 1

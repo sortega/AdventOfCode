@@ -1,5 +1,6 @@
 package advent.y2015
 
+import scala.language.postfixOps
 import scala.util.parsing.combinator.RegexParsers
 import scalaz.Scalaz._
 import scalaz._

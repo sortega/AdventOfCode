@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day2Test extends FlatSpec with ShouldMatchers {
+class Day2Test extends FlatSpec with Matchers {
 
   "Part 1" should "punch no keys for empty instructions" in {
     Day2.part1("") shouldBe ""

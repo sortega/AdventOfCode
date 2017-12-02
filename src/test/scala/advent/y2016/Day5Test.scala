@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day5Test extends FlatSpec with ShouldMatchers {
+class Day5Test extends FlatSpec with Matchers {
 
   "Part 1" should "should 'mine' the password" ignore {
     Day5.part1("abc", zeroes = 3) shouldBe "d8d60944"

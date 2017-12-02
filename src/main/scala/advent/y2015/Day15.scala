@@ -1,7 +1,6 @@
 package advent.y2015
 
 import scalaz.Scalaz._
-import scalaz._
 
 object Day15 {
 

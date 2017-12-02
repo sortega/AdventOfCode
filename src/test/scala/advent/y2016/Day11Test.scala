@@ -1,9 +1,9 @@
 package advent.y2016
 
 import advent.y2016.Day11.{Microchip, Factory, Floor, Generator}
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day11Test extends FlatSpec with ShouldMatchers {
+class Day11Test extends FlatSpec with Matchers {
 
   val testFactory = Factory(elevator = Floor.F1,
                             floors = Map(

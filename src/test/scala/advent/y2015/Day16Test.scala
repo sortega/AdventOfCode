@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day16.{ComplexComparator, Evidence, Profile, SimpleComparator}
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day16Test extends FlatSpec with ShouldMatchers {
+class Day16Test extends FlatSpec with Matchers {
 
   "A profile" should "be parsed" in {
     Profile.parse("Sue 1: goldfish: 9, cars: 0, samoyeds: 9") shouldBe

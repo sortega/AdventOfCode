@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day9Test extends FlatSpec with ShouldMatchers {
+class Day9Test extends FlatSpec with Matchers {
 
   "Part 1" should "compute uncompressed text size" in {
     Day9.part1("") shouldBe 0

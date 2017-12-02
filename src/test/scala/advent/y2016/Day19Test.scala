@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day19Test extends FlatSpec with ShouldMatchers {
+class Day19Test extends FlatSpec with Matchers {
 
   "Part 1" should "compute the elf taking all" in {
     Day19.part1(1) shouldBe 1

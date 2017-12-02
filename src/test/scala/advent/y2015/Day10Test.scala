@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day10Test extends FlatSpec with ShouldMatchers {
+class Day10Test extends FlatSpec with Matchers {
 
   "A number" should "be 'pronounced'" in {
     Day10.pronounce("1") shouldBe "11"

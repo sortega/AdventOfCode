@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day18._
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day18Test extends FlatSpec with ShouldMatchers {
+class Day18Test extends FlatSpec with Matchers {
 
   "A light" should "keep on when having 2 or 3 on neighbors" in {
     Light.On.step(1) shouldBe Light.Off

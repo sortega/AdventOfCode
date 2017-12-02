@@ -1,8 +1,8 @@
 package advent.y2015
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day17Test extends FlatSpec with ShouldMatchers {
+class Day17Test extends FlatSpec with Matchers {
 
   val amount = 25
   val containers = List(20, 15, 10, 5, 5)

@@ -1,8 +1,8 @@
 package advent.y2016
 
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day17Test extends FlatSpec with ShouldMatchers {
+class Day17Test extends FlatSpec with Matchers {
 
   "Part 1" should "find the shortest path" in {
     Day17.part1("ihgpwlah") shouldBe "DDRRRD"

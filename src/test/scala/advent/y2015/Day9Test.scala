@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day9.DistanceTable
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day9Test extends FlatSpec with ShouldMatchers {
+class Day9Test extends FlatSpec with Matchers {
 
   private val table = DistanceTable(
     "London" -> "Dublin" -> 464,

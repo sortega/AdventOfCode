@@ -90,7 +90,7 @@ object Day22 {
       State(goalData = Point(MaxX, y = 0),
             hole = Point(x = 28, y = MaxY),
             nodes.filter(n => n.used < 100).map(_.pos).toSet)
-    val goalState = initialState.copy(goalData = TargetPos, hole = Point(x = 1, y = 0))
+//    val goalState = initialState.copy(goalData = TargetPos, hole = Point(x = 1, y = 0))
 
     val path = searcher.search(initialState, _.goalData == TargetPos).get
     path.foreach(s => println(s + "\n"))

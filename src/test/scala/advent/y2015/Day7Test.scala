@@ -1,9 +1,9 @@
 package advent.y2015
 
 import advent.y2015.Day7._
-import org.scalatest.{FlatSpec, ShouldMatchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day7Test extends FlatSpec with ShouldMatchers {
+class Day7Test extends FlatSpec with Matchers {
 
   "The circuit parser" should "parse hardwired signals" in {
     Day7.CircuitParser.parse("42 -> a") shouldBe Circuit(DirectConnection(Constant(42), "a"))
