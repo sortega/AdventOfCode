@@ -7,15 +7,6 @@ import advent.y2016.timed
 
 object Day3 {
 
-  sealed abstract class SpiralArm(val dir: Point)
-
-  object SpiralArm {
-    case object Up    extends SpiralArm(Point.Up)
-    case object Left  extends SpiralArm(Point.Left)
-    case object Down  extends SpiralArm(Point.Down)
-    case object Right extends SpiralArm(Point.Right)
-  }
-
   def part1(input: Int): Int = spiralCoords(input - 1).norm1
 
   def part2(input: Int): Int = {
