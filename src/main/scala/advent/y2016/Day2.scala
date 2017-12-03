@@ -3,6 +3,8 @@ package advent.y2016
 import scalaz.Scalaz._
 import scalaz._
 
+import advent.geom.Point
+
 object Day2 {
 
   type Action = Point => Writer[String, Point]

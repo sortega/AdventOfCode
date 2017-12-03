@@ -1,9 +1,11 @@
 package advent.y2016
 
+import advent.geom.Point
+
 class Day13(seed: Int) {
 
   private def adjacentPoints(point: Point): Set[Point] =
-    point.adjacent.filter(p => (p.x >= 0) && (p.y >= 0) && openSpace(p))
+    point.adjacent4.filter(p => (p.x >= 0) && (p.y >= 0) && openSpace(p))
 
   private def openSpace(point: Point): Boolean = {
     import point._

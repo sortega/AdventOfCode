@@ -2,6 +2,8 @@ package advent.y2016
 
 import scala.annotation.tailrec
 
+import advent.geom.Point
+
 object Day1 {
 
   sealed trait Instruction

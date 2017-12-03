@@ -1,6 +1,9 @@
 package advent.y2016
 
-import scalaz._, Scalaz._
+import scalaz._
+import Scalaz._
+
+import advent.geom.Point
 
 object Day22 {
 
@@ -52,7 +55,7 @@ object Day22 {
   case class State(goalData: Point, hole: Point, nodes: Set[Point]) {
     def nextStates: Set[State] =
       for {
-        to <- hole.adjacent if nodes.contains(to)
+        to <- hole.adjacent4 if nodes.contains(to)
       } yield
         copy(
           goalData = if (to == goalData) hole else goalData,

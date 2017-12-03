@@ -1,5 +1,7 @@
 package advent.y2016
 
+import advent.geom.Point
+
 object Day17 {
 
   val Goal = Point(3, 3)

@@ -1,5 +1,7 @@
 package advent.y2016
 
+import advent.geom.Point
+
 object Day24 {
 
   type Route = Vector[Int]
@@ -7,7 +9,7 @@ object Day24 {
   case class Maze(spots: Map[Int, Point], openSpaces: Set[Point]) {
     def distance(from: Point, to: Point): Int = {
       val path = new AStar[Point](distance = (_, _) => 1,
-                                  neighbors = _.adjacent.intersect(openSpaces),
+                                  neighbors = _.adjacent4.intersect(openSpaces),
                                   heuristic = point => (point - to).norm1).search(from, _ == to)
       path.getOrElse(throw new Error(s"No path from $from to $to")).size - 1
     }
