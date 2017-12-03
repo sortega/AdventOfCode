@@ -1,6 +1,6 @@
 package advent.y2017
 
-import scala.collection.mutable
+import scala.annotation.tailrec
 
 import advent.geom.Point
 import advent.y2016.timed
@@ -19,15 +19,15 @@ object Day3 {
   def part1(input: Int): Int = spiralCoords(input - 1).norm1
 
   def part2(input: Int): Int = {
-    val written = mutable.Map(Point.Origin -> 1)
-    spiralCoords.tail.foreach { pos =>
+    @tailrec
+    def iterate(spiral: Stream[Point], written: Map[Point, Int]): Int = {
+      val pos   = spiral.head
       val value = pos.adjacent8.toList.flatMap(written.get).sum
-      written.put(pos, value)
-      if (value > input) {
-        return value
-      }
+      if (value > input) value
+      else iterate(spiral.tail, written.updated(pos, value))
     }
-    throw new IllegalStateException("unreachable line")
+
+    iterate(spiralCoords.tail, Map(Point.Origin -> 1))
   }
 
   def spiralCoords: Stream[Point] = {
