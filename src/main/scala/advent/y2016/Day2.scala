@@ -3,7 +3,7 @@ package advent.y2016
 import scalaz.Scalaz._
 import scalaz._
 
-import advent.geom.Point
+import advent.shared.Point
 
 object Day2 {
 

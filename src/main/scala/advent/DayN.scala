@@ -1,6 +1,6 @@
 package advent
 
-import advent.y2016.timed
+import advent.shared.Time.timed
 
 object DayN {
 

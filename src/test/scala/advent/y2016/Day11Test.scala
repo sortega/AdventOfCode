@@ -1,6 +1,6 @@
 package advent.y2016
 
-import advent.y2016.Day11.{Microchip, Factory, Floor, Generator}
+import advent.y2016.Day11.{Factory, Floor, Generator, Microchip}
 import org.scalatest.{FlatSpec, Matchers}
 
 class Day11Test extends FlatSpec with Matchers {

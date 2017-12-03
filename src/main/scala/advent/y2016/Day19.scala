@@ -2,6 +2,8 @@ package advent.y2016
 
 import scala.annotation.tailrec
 
+import advent.shared.Time.timed
+
 object Day19 {
 
   def part1(n: Int): Int = n match {

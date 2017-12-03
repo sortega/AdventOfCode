@@ -1,9 +1,8 @@
 package advent.y2016
 
-import scala.collection.mutable
-import scalaz._
-import Scalaz._
 import scala.collection.immutable.Queue
+import scala.collection.mutable
+import scalaz.Scalaz._
 
 object BFS {
 

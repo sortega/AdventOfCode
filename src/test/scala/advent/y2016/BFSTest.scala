@@ -1,6 +1,6 @@
 package advent.y2016
 
-import advent.geom.Point
+import advent.shared.Point
 import org.scalatest.{FlatSpec, Matchers}
 
 class BFSTest extends FlatSpec with Matchers {

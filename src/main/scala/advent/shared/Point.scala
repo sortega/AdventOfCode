@@ -1,4 +1,4 @@
-package advent.geom
+package advent.shared
 
 case class Point(x: Int, y: Int) {
   import Point._

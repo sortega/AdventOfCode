@@ -1,9 +1,9 @@
 package advent.y2016
 
-import scalaz._
-import Scalaz._
+import scalaz.Scalaz._
 
-import advent.geom.Point
+import advent.shared.Point
+import advent.shared.Time.timed
 
 object Day22 {
 
@@ -31,7 +31,7 @@ object Day22 {
     } yield 1).sum
   }
 
-  private def visualizeMap(nodes: Vector[Node]) = {
+  private def visualizeMap(nodes: Vector[Node]): Unit = {
     val nodeMap = nodes.map(n => n.pos -> n).toMap
     val maxX = nodeMap.values.map(_.pos.x).max
     val maxY = nodeMap.values.map(_.pos.y).max

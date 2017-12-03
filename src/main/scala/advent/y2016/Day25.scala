@@ -2,6 +2,7 @@ package advent.y2016
 
 import scala.annotation.tailrec
 
+import advent.shared.Time.timed
 import advent.y2016.AssemblyBunny._
 
 object Day25 {

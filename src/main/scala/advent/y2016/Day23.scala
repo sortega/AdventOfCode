@@ -1,5 +1,6 @@
 package advent.y2016
 
+import advent.shared.Time.timed
 import advent.y2016.AssemblyBunny.{AssemblyGrammar, Computer, Register}
 
 object Day23 {

@@ -2,8 +2,8 @@ package advent.y2017
 
 import scala.annotation.tailrec
 
-import advent.geom.Point
-import advent.y2016.timed
+import advent.shared.Point
+import advent.shared.Time.timed
 
 object Day3 {
 

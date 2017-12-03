@@ -1,10 +1,9 @@
 package advent.y2016
 
 import scala.annotation.tailrec
-import scala.util.parsing.combinator.RegexParsers
-import scalaz._
-import Scalaz._
 import scala.language.postfixOps
+import scala.util.parsing.combinator.RegexParsers
+import scalaz.Scalaz._
 
 object Day10 {
 
