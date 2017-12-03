@@ -16,12 +16,11 @@ object Day3 {
     case object Right extends SpiralArm(Point.Right)
   }
 
-  def part1(input: Int): Int = coordsFor(input).norm1
+  def part1(input: Int): Int = spiralCoords(input - 1).norm1
 
   def part2(input: Int): Int = {
     val written = mutable.Map(Point.Origin -> 1)
-    Stream.from(2).foreach { i =>
-      val pos   = coordsFor(i)
+    spiralCoords.tail.foreach { pos =>
       val value = pos.adjacent8.toList.flatMap(written.get).sum
       written.put(pos, value)
       if (value > input) {
@@ -31,45 +30,16 @@ object Day3 {
     throw new IllegalStateException("unreachable line")
   }
 
-  def coordsFor(index: Int): Point =
-    if (index <= 1) Point.Origin
-    else {
-      val radius           = radiusOfConcentricSquareFor(index)
-      val offset           = offsetWithinSquare(radius, index)
-      val (arm, armOffset) = locate(radius, offset)
-      toPoint(radius, arm, armOffset)
+  def spiralCoords: Stream[Point] = {
+    val radii = Stream.from(1)
+    val deltas = radii.flatMap { radius =>
+      val side = 2 * radius - 1
+      Vector.fill(side - 2)(Point.Up) ++
+        Vector.fill(side - 1)(Point.Left) ++
+        Vector.fill(side - 1)(Point.Down) ++
+        Vector.fill(side)(Point.Right)
     }
-
-  private def radiusOfConcentricSquareFor(index: Int): Int =
-    Math.ceil((Math.sqrt(index) + 1) / 2).toInt
-
-  private def offsetWithinSquare(radius: Int, index: Int): Int = {
-    val side = 2 * radius - 3
-    index - side * side - 1
-  }
-
-  private def locate(radius: Int, offset: Int): (SpiralArm, Int) = {
-    val armLength = 2 * radius - 2
-    val armIndex  = offset / armLength
-    val arm = armIndex match {
-      case 0 => SpiralArm.Up
-      case 1 => SpiralArm.Left
-      case 2 => SpiralArm.Down
-      case 3 => SpiralArm.Right
-    }
-    (arm, offset % armLength)
-  }
-
-  private def toPoint(radius: Int, arm: SpiralArm, offset: Int): Point = {
-    val upArmStart = Point(x = radius - 1, y = 2 - radius)
-    val armStart = arm match {
-      case SpiralArm.Up    => upArmStart
-      case SpiralArm.Left  => upArmStart.turnLeft
-      case SpiralArm.Down  => upArmStart.turnLeft.turnLeft
-      case SpiralArm.Right => upArmStart.turnRight
-    }
-    val path = arm.dir.scaleBy(offset)
-    armStart + path
+    deltas.scanLeft(Point.Origin)(_ + _)
   }
 
   def main(args: Array[String]): Unit = {

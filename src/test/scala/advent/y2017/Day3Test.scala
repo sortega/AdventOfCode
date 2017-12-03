@@ -5,12 +5,17 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class Day3Test extends FlatSpec with Matchers {
 
-  "Spiral coordinates" should "be transformed to points" in {
-    Day3.coordsFor(1) shouldBe Point.Origin
-    Day3.coordsFor(2) shouldBe Point(1, 0)
-    Day3.coordsFor(9) shouldBe Point(1, -1)
-    Day3.coordsFor(21) shouldBe Point(-2, -2)
-    Day3.coordsFor(26) shouldBe Point(3, -2)
+  "Spiral coordinates" should "flow into a stream" in {
+    Day3.spiralCoords.take(10) shouldBe List(Point(0, 0),
+                                             Point(1, 0),
+                                             Point(1, 1),
+                                             Point(0, 1),
+                                             Point(-1, 1),
+                                             Point(-1, 0),
+                                             Point(-1, -1),
+                                             Point(0, -1),
+                                             Point(1, -1),
+                                             Point(2, -1))
   }
 
   "Part 1" should "get the Manhattan distance to the point" in {
