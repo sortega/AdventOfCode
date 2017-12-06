@@ -1,7 +1,6 @@
 package advent.y2017
 
-import scala.reflect.ClassTag
-
+import advent.shared.Mutation.mutate
 import advent.shared.Streams
 import advent.shared.Streams.Cycle
 import advent.shared.Time.timed
@@ -23,12 +22,6 @@ object Day6 {
     private def chooseBankToRedistribute: Int = {
       val max = blocks.max
       blocks.indexWhere(_ == max)
-    }
-
-    private def mutate[A: ClassTag](vector: Vector[A])(block: Array[A] => Unit): Vector[A] = {
-      val array = vector.toArray
-      block(array)
-      array.toVector
     }
   }
 
