@@ -1,10 +1,10 @@
 package advent.y2017
 
+import scalaz.Scalaz._
+
 import advent.shared.Time.timed
 import fastparse.WhitespaceApi
-import fastparse.noApi._
-import scalaz._
-import Scalaz._
+import fastparse.all._
 
 object Day7 {
 
@@ -15,41 +15,30 @@ object Day7 {
   case class Input(specs: List[ProgramSpec])
 
   object Input {
-    private object Parser {
-      val White = WhitespaceApi.Wrapper {
-        import fastparse.all._
-        NoTrace(" ".rep)
-      }
+    private object Grammar {
+      val White = WhitespaceApi.Wrapper(NoTrace(" ".rep))
       import White._
 
       val id: P[Id]                = P(CharIn('a' to 'z').rep(1).!)
-      val weight: P[Int]           = P("(" ~/ CharIn('0' to '9').rep(1).!.map(_.toInt) ~ ")")
-      val subPrograms: P[List[Id]] = P(("->" ~/ id.rep(min = 1, sep = ",")).map(_.toList))
-      val programSpec: P[ProgramSpec] = P((id ~ weight ~ subPrograms.?).map {
+      val weight: P[Int]           = P("(" ~/ CharIn('0' to '9').rep(1).! ~ ")").map(_.toInt)
+      val subPrograms: P[List[Id]] = P("->" ~/ id.rep(min = 1, sep = "," ~/ Pass)).map(_.toList)
+      val programSpec: P[ProgramSpec] = P(id ~ weight ~ subPrograms.? ~/ "\n").map {
         case (id, weight, maybeSubPrograms) =>
           ProgramSpec(id, weight, maybeSubPrograms.getOrElse(Nil))
-      })
-      val input: P[Input] = P(
-        (programSpec.rep(sep = "\n") ~ "\n".rep)
-          .map(specs => Input(specs.toList)))
+      }
+      val input: P[Input] = P(programSpec.rep ~ End).map(specs => Input(specs.toList))
     }
 
-    def parse(text: String): Input = {
-      val Parsed.Success(parsed, _) = Parser.input.parse(text)
-      parsed
-    }
+    def parse(text: String): Input = Grammar.input.parse(text).get.value
   }
 
   def part1(rawInput: String): String = findRoot(Input.parse(rawInput))
 
   private def findRoot(input: Input): Id = {
-    val stats = input.specs.foldMap { spec =>
-      Map(
-        'ids         -> Set(spec.id),
-        'subprograms -> spec.subPrograms.toSet
-      )
+    val (ids, subprograms) = input.specs.foldMap { spec =>
+      Set(spec.id) -> spec.subPrograms.toSet
     }
-    (stats('ids) -- stats('subprograms)).head
+    (ids -- subprograms).head
   }
 
   case class ProgramTower(id: String, weight: Int, children: List[ProgramTower]) {
@@ -62,10 +51,10 @@ object Day7 {
         val weights = groups.keySet
         groups
           .collectFirst {
-            case (unbalancedWeight, List(unbalancedSubTower)) =>
-              val balancedWeight = (weights - unbalancedWeight).head
-              unbalancedSubTower.rebalance.getOrElse(
-                unbalancedSubTower.id -> (unbalancedSubTower.weight - unbalancedWeight + balancedWeight))
+            case (currentWeight, List(unbalancedTower)) =>
+              val targetWeight = (weights - currentWeight).head
+              unbalancedTower.rebalance.getOrElse(
+                unbalancedTower.id -> (unbalancedTower.weight - currentWeight + targetWeight))
           }
       }
     }
