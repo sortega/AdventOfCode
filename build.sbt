@@ -32,10 +32,11 @@ lazy val root = (project in file(".")).settings(
     )),
   name := "advent-of-code",
   libraryDependencies ++= Seq(
-    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
+    "com.lihaoyi" %% "fastparse" % "1.0.0",
     "io.spray" %%  "spray-json" % "1.3.2",
-    "org.scalaz" %% "scalaz-core" % versions.scalaz,
+    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
     "org.scalacheck" %% "scalacheck" % versions.scalacheck % "test",
-    "org.scalatest" %% "scalatest" % versions.scalatest % "test"
+    "org.scalatest" %% "scalatest" % versions.scalatest % "test",
+    "org.scalaz" %% "scalaz-core" % versions.scalaz
   )
 )
