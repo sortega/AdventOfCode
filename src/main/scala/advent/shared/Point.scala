@@ -12,6 +12,12 @@ case class Point(x: Int, y: Int) {
   def scaleBy(factor: Int): Point = Point(x * factor, y * factor)
   def adjacent4: Set[Point]       = AdjacentDeltas.map(_ + this)
   def adjacent8: Set[Point]       = AdjacentDeltasWithDiagonals.map(_ + this)
+
+  def euclideanDistanceTo(other: Point): Double = {
+    val dx = x - other.x
+    val dy = y - other.y
+    Math.sqrt(dx * dx + dy * dy)
+  }
 }
 
 object Point {
