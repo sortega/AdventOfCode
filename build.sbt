@@ -18,6 +18,7 @@ lazy val root = (project in file(".")).settings(
         "-explaintypes",
         "-feature",
         "-unchecked",
+        "-Xlint:unsound-match",
         "-Ywarn-dead-code",
         "-Ypartial-unification",
         "-Ywarn-unused:imports",
