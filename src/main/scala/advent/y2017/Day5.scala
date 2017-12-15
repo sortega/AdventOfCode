@@ -1,7 +1,6 @@
 package advent.y2017
 
-import scala.annotation.tailrec
-
+import advent.shared.Streams
 import advent.shared.Time.timed
 
 object Day5 {
@@ -33,13 +32,7 @@ object Day5 {
   private def part2update(n: Int): Int = if (n >= 3) n - 1 else n + 1
 
   private def stepsUntilEscaping(initialState: State): Int =
-    streamLength(initialState.states) - 1
-
-  @tailrec
-  private def streamLength[A](stream: Stream[A], length: Int = 0): Int = stream match {
-    case Stream.Empty => length
-    case _ #:: tail   => streamLength(tail, length + 1)
-  }
+    Streams.length(initialState.states) - 1
 
   def main(args: Array[String]): Unit = {
     val input = inputResource(5).getLines().map(_.toInt).toVector
