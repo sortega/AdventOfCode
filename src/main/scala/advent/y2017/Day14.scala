@@ -1,9 +1,8 @@
 package advent.y2017
 
-import scala.annotation.tailrec
-
 import advent.shared.Point
 import advent.shared.Time.timed
+import advent.shared.graphs.PointGraph
 
 object Day14 {
 
@@ -33,32 +32,8 @@ object Day14 {
       if square == 1
     } yield Point(y = rowIndex, x = colIndex)).toSet
 
-  // TODO: a previous day was also finding all connected components. This can be abstracted away
-  private def connectedComponents(nodes: Set[Point]): List[Set[Point]] = {
-    @tailrec
-    def expandComponent(open: List[Point], closed: Set[Point]): Set[Point] = open match {
-      case Nil => closed
-      case node :: remainingOpen if nodes.contains(node) && !closed.contains(node) =>
-        expandComponent(remainingOpen ++ node.adjacent4, closed + node)
-      case _ :: remainingOpen => expandComponent(remainingOpen, closed)
-    }
-
-    def componentContaining(node: Point): Set[Point] =
-      expandComponent(open = List(node), closed = Set.empty)
-
-    @tailrec
-    def allConnectedComponents(unassignedNodes: Set[Point],
-                               components: List[Set[Point]] = Nil): List[Set[Point]] =
-      if (unassignedNodes.isEmpty) components
-      else {
-        val component = componentContaining(unassignedNodes.head)
-        allConnectedComponents(unassignedNodes.diff(component), component +: components)
-      }
-
-    allConnectedComponents(nodes)
-  }
-
-  def part2(input: String): Int = connectedComponents(freeSquares(decodeMaze(input))).size
+  def part2(input: String): Int =
+    PointGraph(freeSquares(decodeMaze(input))).connectedComponents.size
 
   def main(args: Array[String]): Unit = {
     val input = "nbysizxe"
