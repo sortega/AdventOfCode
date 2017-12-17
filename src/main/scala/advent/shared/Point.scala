@@ -16,7 +16,7 @@ case class Point(x: Int, y: Int) {
   def euclideanDistanceTo(other: Point): Double = {
     val dx = x - other.x
     val dy = y - other.y
-    Math.sqrt(dx * dx + dy * dy)
+    scala.math.sqrt(dx * dx + dy * dy)
   }
 }
 
