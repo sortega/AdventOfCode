@@ -97,11 +97,9 @@ object Day21 {
   }
 
   case class RuleBook(rules: List[Rule]) {
-    def transform(pattern: Pattern): Pattern = {
-      println(s"\nExpanding size ${pattern.size}")
+    def transform(pattern: Pattern): Pattern =
       if (pattern.size <= 3) transformTile(pattern)
       else pattern.mapTiles(tileSizeFor(pattern))(transformTile)
-    }
 
     private def transformTile(pattern: Pattern) =
       rules
