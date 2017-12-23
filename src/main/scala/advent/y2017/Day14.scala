@@ -1,7 +1,7 @@
 package advent.y2017
 
-import advent.shared.Point
 import advent.shared.Time.timed
+import advent.shared.geom.Point
 import advent.shared.graphs.PointGraph
 
 object Day14 {

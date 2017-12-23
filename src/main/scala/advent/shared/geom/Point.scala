@@ -1,4 +1,4 @@
-package advent.shared
+package advent.shared.geom
 
 case class Point(x: Int, y: Int) {
   import Point._
@@ -22,10 +22,10 @@ case class Point(x: Int, y: Int) {
 
 object Point {
   val Origin         = Point(x = 0, y = 0)
-  val Up             = Point(0, 1)
-  val Down           = Point(0, -1)
-  val Left           = Point(-1, 0)
-  val Right          = Point(1, 0)
+  val Up             = CardinalPoint.North.delta
+  val Down           = CardinalPoint.South.delta
+  val Left           = CardinalPoint.West.delta
+  val Right          = CardinalPoint.East.delta
   val AdjacentDeltas = Set(Up, Down, Left, Right)
   val AdjacentDeltasWithDiagonals = (for {
     x <- -1 to 1

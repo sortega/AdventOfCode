@@ -2,9 +2,12 @@ package advent.y2017
 
 import scala.collection.parallel.ForkJoinTaskSupport
 
-import advent.shared.{Functions, Point}
+import advent.shared.Functions
 import advent.shared.Time.timed
-import scalaz._, Scalaz._
+import scalaz._
+import Scalaz._
+
+import advent.shared.geom.Point
 
 object Day21 {
 

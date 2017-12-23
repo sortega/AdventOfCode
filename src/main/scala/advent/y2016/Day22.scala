@@ -2,8 +2,8 @@ package advent.y2016
 
 import scalaz.Scalaz._
 
-import advent.shared.Point
 import advent.shared.Time.timed
+import advent.shared.geom.Point
 
 object Day22 {
 

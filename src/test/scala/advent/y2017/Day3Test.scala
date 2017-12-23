@@ -1,6 +1,6 @@
 package advent.y2017
 
-import advent.shared.Point
+import advent.shared.geom.Point
 import org.scalatest.{FlatSpec, Matchers}
 
 class Day3Test extends FlatSpec with Matchers {

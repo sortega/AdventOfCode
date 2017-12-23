@@ -1,6 +1,6 @@
 package advent.y2016
 
-import advent.shared.Point
+import advent.shared.geom.Point
 
 class Day13(seed: Int) {
 

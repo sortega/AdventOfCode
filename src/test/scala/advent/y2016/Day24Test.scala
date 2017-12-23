@@ -1,6 +1,6 @@
 package advent.y2016
 
-import advent.shared.Point
+import advent.shared.geom.Point
 import advent.y2016.Day24._
 import org.scalatest.{FlatSpec, Matchers}
 
