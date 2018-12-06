@@ -18,6 +18,8 @@ case class Point(x: Int, y: Int) {
     val dy = y - other.y
     scala.math.sqrt(dx * dx + dy * dy)
   }
+
+  def manhattanDistanceTo(other: Point): Int = (x - other.x).abs + (y - other.y).abs
 }
 
 object Point {
@@ -32,4 +34,9 @@ object Point {
     y <- -1 to 1
     if x != 0 || y != 0
   } yield Point(x, y)).toSet
+
+  def parse(string: String): Point = {
+    val Array(x, y) = string.split(", ").map(_.toInt)
+    Point(x, y)
+  }
 }
