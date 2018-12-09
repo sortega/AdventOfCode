@@ -1,7 +1,6 @@
 package advent.y2017
 
 import advent.shared.Time.timed
-import fastparse.all._
 
 object Day9 {
 
@@ -24,18 +23,20 @@ object Day9 {
 
   object Content {
     private object Grammar {
-      val group: P[Group] =
+      import fastparse._, JavaWhitespace._
+
+      def group[_: P]: P[Group] =
         P("{" ~/ content.rep(sep = "," ~/ Pass) ~ "}").map(children => Group(children))
 
-      val garbage: P[Garbage] =
+      def garbage[_: P]: P[Garbage] =
         P("<" ~/ (regularChars | cancelledChar).rep ~ ">").map(sizes => Garbage(sizes.sum))
-      val regularChars: P[Int]  = CharsWhile(c => c != '>' && c != '!').!.map(_.length)
-      val cancelledChar: P[Int] = P("!" ~ AnyChar).map(_ => 0)
+      def regularChars[_: P]: P[Int]  = CharsWhile(c => c != '>' && c != '!').!.map(_.length)
+      def cancelledChar[_: P]: P[Int] = P("!" ~ AnyChar).map(_ => 0)
 
-      val content: P[Content] = P(group | garbage)
+      def content[_: P]: P[Content] = P(group | garbage)
     }
 
-    def parse(text: String): Content = Grammar.content.parse(text).get.value
+    def parse(text: String): Content = fastparse.parse(text, Grammar.content(_)).get.value
   }
 
   def part1(input: String): Int = Content.parse(input).score

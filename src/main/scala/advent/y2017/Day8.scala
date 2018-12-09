@@ -1,8 +1,6 @@
 package advent.y2017
 
 import advent.shared.Time.timed
-import fastparse.WhitespaceApi
-import fastparse.all._
 
 object Day8 {
 
@@ -37,39 +35,35 @@ object Day8 {
 
   object Instruction {
     private object Grammar {
-      val White = WhitespaceApi.Wrapper(NoTrace(" ".rep))
-      import White._
+      import fastparse._, JavaWhitespace._
 
-      val id: P[Symbol] = P(CharsWhileIn('a' to 'z').!).map(Symbol.apply).opaque("identifier")
+      def id[_: P]: P[Symbol] = P(CharsWhileIn("a-z").!).map(Symbol.apply).opaque("identifier")
 
-      val int: P[Int] = P(("-".? ~ CharIn('0' to '9').rep(1)).!).map(_.toInt)
+      def int[_: P]: P[Int] = P(("-".? ~ CharsWhileIn("0-9")).!).map(_.toInt)
 
-      val operation: P[Int] = mapping(P("inc") -> 1, P("dec") -> -1)
+      def operation[_: P]: P[Int] = P("inc").map(_ => 1) | P("dec").map(_ => -1)
 
-      val relation: P[Relation] = mapping(
-        P("<=") -> Relation.LE,
-        P("<")  -> Relation.LT,
-        P(">=") -> Relation.GE,
-        P(">")  -> Relation.GT,
-        P("==") -> Relation.EQ,
-        P("!=") -> Relation.NE
-      )
+      def relation[_: P]: P[Relation] =
+        P("<=").map(_ => Relation.LE) |
+          P("<").map(_ => Relation.LT) |
+          P(">=").map(_ => Relation.GE) |
+          P(">").map(_ => Relation.GT) |
+          P("==").map(_ => Relation.EQ) |
+          P("!=").map(_ => Relation.NE)
 
-      def mapping[A](pairs: (P0, A)*): P[A] =
-        pairs.map { case (p, a) => p.map(_ => a) }.reduce(_ | _)
-
-      val condition: P[Condition] = P("if" ~/ id ~ relation ~ int).map {
+      def condition[_: P]: P[Condition] = P("if" ~/ id ~ relation ~ int).map {
         case (reg, rel, constant) => Condition(reg, rel, constant)
       }
 
-      val instruction: P[Instruction] = P(id ~/ operation ~/ int ~/ condition ~ "\n".?).map {
+      def instruction[_: P]: P[Instruction] = P(id ~/ operation ~/ int ~/ condition ~ "\n".?).map {
         case (reg, sign, increment, cond) =>
           Instruction(reg, sign * increment, cond)
       }
-      val input: P[Vector[Instruction]] = P(instruction.rep).map(_.toVector)
+      def input[_: P]: P[Vector[Instruction]] = P(instruction.rep).map(_.toVector)
     }
 
-    def parseAll(text: String): Vector[Instruction] = Grammar.input.parse(text).get.value
+    def parseAll(text: String): Vector[Instruction] =
+      fastparse.parse(text, Grammar.input(_)).get.value
   }
 
   def part1(rawInput: String): Int = {

@@ -2,7 +2,6 @@ package advent.y2017
 
 import advent.shared.Streams
 import advent.shared.Time.timed
-import fastparse.all._
 
 object Day16 {
 
@@ -17,18 +16,19 @@ object Day16 {
     case class Partner(a: Char, b: Char) extends Move
 
     private object Grammar {
-      val id: P[Char] = P(CharIn('a' to 'z').!).map(_.head).opaque("identifier")
-      val int: P[Int] = P(CharIn('0' to '9').rep(1).!).map(_.toInt)
+      import fastparse._, JavaWhitespace._
+      def id[_: P]: P[Char] = P(CharsWhileIn("a-z").!).map(_.head).opaque("identifier")
+      def int[_: P]: P[Int] = P(CharsWhileIn("0-9").!).map(_.toInt)
 
-      val move: P[Move]         = P(spin | exchange | partner)
-      val spin: P[Spin]         = P("s" ~ int).map(Spin.apply)
-      val exchange: P[Exchange] = P("x" ~ int ~ "/" ~ int).map(Exchange.tupled)
-      val partner: P[Partner]   = P("p" ~ id ~ "/" ~ id).map(Partner.tupled)
+      def move[_: P]: P[Move]         = P(spin | exchange | partner)
+      def spin[_: P]: P[Spin]         = P("s" ~ int).map(Spin.apply)
+      def exchange[_: P]: P[Exchange] = P("x" ~ int ~ "/" ~ int).map(Exchange.tupled)
+      def partner[_: P]: P[Partner]   = P("p" ~ id ~ "/" ~ id).map(Partner.tupled)
 
-      val dance: P[Seq[Move]] = P(move.rep(sep = ",") ~ End)
+      def dance[_: P]: P[Seq[Move]] = P(move.rep(min = 0, sep = ",") ~ End)
     }
 
-    def parseDance(input: String): Seq[Move] = Grammar.dance.parse(input).get.value
+    def parseDance(input: String): Seq[Move] = fastparse.parse(input, Grammar.dance(_)).get.value
   }
 
   case class Queue(programs: Vector[Char]) extends AnyVal {

@@ -4,8 +4,6 @@ import scalaz.Scalaz._
 
 import advent.shared.Time.timed
 import advent.shared.graphs.UndirectedAdjacencyGraph
-import fastparse.WhitespaceApi
-import fastparse.all._
 
 object Day12 {
   type Node  = Int
@@ -13,21 +11,23 @@ object Day12 {
 
   object Graph {
     private object Grammar {
-      val White = WhitespaceApi.Wrapper(NoTrace(" ".rep))
-      import White._
-      val node: P[Node]          = P(CharsWhileIn('0' to '9').!).map(_.toInt)
-      val nodeList: P[Set[Node]] = P(node.rep(min = 1, sep = ",").map(_.toSet))
-      val adjacency: P[Map[Node, Set[Node]]] = P(node ~ "<->" ~ nodeList ~ "\n").map {
+      import fastparse._, SingleLineWhitespace._
+      def node[_: P]: P[Node]          = P(CharsWhileIn("0-9").!).map(_.toInt)
+      def nodeList[_: P]: P[Set[Node]] = P(node.rep(min = 1, sep = ",").map(_.toSet))
+      def adjacency[_: P]: P[Map[Node, Set[Node]]] = P(node ~ "<->" ~ nodeList ~ "\n").map {
         case (node, adjacent) => Map(node -> adjacent)
       }
-      val graph: P[Graph] =
-        P(adjacency.rep).map(adj => UndirectedAdjacencyGraph.fromAdjacency(adj.toList.suml))
+      def graph[_: P]: P[Graph] =
+        P(adjacency.rep ~ End).map(adj => UndirectedAdjacencyGraph.fromAdjacency(adj.toList.suml))
     }
 
-    def parse(text: String): Graph = Grammar.graph.parse(text).get.value
+    def parse(text: String): Graph = fastparse.parse(text, Grammar.graph(_)).get.value
   }
 
-  def part1(input: String): Int = Graph.parse(input).connectedComponentOf(0).size
+  def part1(input: String): Int = {
+    val graph = Graph.parse(input)
+    graph.connectedComponentOf(0).size
+  }
 
   def part2(input: String): Int = Graph.parse(input).connectedComponents.size
 

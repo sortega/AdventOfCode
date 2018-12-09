@@ -3,8 +3,6 @@ package advent.y2017
 import scalaz.Scalaz._
 
 import advent.shared.Time.timed
-import fastparse.WhitespaceApi
-import fastparse.all._
 
 object Day7 {
 
@@ -16,20 +14,19 @@ object Day7 {
 
   object Input {
     private object Grammar {
-      val White = WhitespaceApi.Wrapper(NoTrace(" ".rep))
-      import White._
+      import fastparse._, SingleLineWhitespace._
 
-      val id: P[Id]                = P(CharIn('a' to 'z').rep(1).!)
-      val weight: P[Int]           = P("(" ~/ CharIn('0' to '9').rep(1).! ~ ")").map(_.toInt)
-      val subPrograms: P[List[Id]] = P("->" ~/ id.rep(min = 1, sep = "," ~/ Pass)).map(_.toList)
-      val programSpec: P[ProgramSpec] = P(id ~ weight ~ subPrograms.? ~/ "\n").map {
+      def id[_: P]: P[Id]                = P(CharsWhileIn("a-z").!)
+      def weight[_: P]: P[Int]           = P("(" ~/ CharsWhileIn("0-9").! ~ ")").map(_.toInt)
+      def subPrograms[_: P]: P[List[Id]] = P("->" ~/ id.rep(min = 1, sep = "," ~/ Pass)).map(_.toList)
+      def programSpec[_: P]: P[ProgramSpec] = P(id ~ weight ~ subPrograms.? ~/ "\n").map {
         case (id, weight, maybeSubPrograms) =>
           ProgramSpec(id, weight, maybeSubPrograms.getOrElse(Nil))
       }
-      val input: P[Input] = P(programSpec.rep ~ End).map(specs => Input(specs.toList))
+      def input[_: P]: P[Input] = P(programSpec.rep ~ End).map(specs => Input(specs.toList))
     }
 
-    def parse(text: String): Input = Grammar.input.parse(text).get.value
+    def parse(text: String): Input = fastparse.parse(text, Grammar.input(_)).get.value
   }
 
   def part1(rawInput: String): String = findRoot(Input.parse(rawInput))
