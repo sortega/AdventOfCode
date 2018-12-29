@@ -1,6 +1,6 @@
 package advent.shared.geom
 
-case class Point(x: Int, y: Int) {
+final case class Point(x: Int, y: Int) {
   import Point._
 
   def +(other: Point): Point      = Point(x + other.x, y + other.y)
