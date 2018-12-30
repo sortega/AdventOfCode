@@ -3,15 +3,16 @@ package advent.shared.geom
 final case class Point(x: Int, y: Int) {
   import Point._
 
-  def +(other: Point): Point      = Point(x + other.x, y + other.y)
-  def -(other: Point): Point      = Point(x - other.x, y - other.y)
-  def *(other: Point): Point      = Point(x * other.x - y * other.y, x * other.y + y * other.x)
-  def turnRight: Point            = this * Point(x = 0, y = -1)
-  def turnLeft: Point             = this * Point(x = 0, y = 1)
-  def norm1: Int                  = x.abs + y.abs
-  def scaleBy(factor: Int): Point = Point(x * factor, y * factor)
-  def adjacent4: Set[Point]       = AdjacentDeltas.map(_ + this)
-  def adjacent8: Set[Point]       = AdjacentDeltasWithDiagonals.map(_ + this)
+  def +(other: Point): Point               = Point(x + other.x, y + other.y)
+  def -(other: Point): Point               = Point(x - other.x, y - other.y)
+  def hadamardProduct(other: Point): Point = Point(x * other.x, y * other.y)
+  def *(other: Point): Point               = Point(x * other.x - y * other.y, x * other.y + y * other.x)
+  def turnRight: Point                     = this * Point(x = 0, y = -1)
+  def turnLeft: Point                      = this * Point(x = 0, y = 1)
+  def norm1: Int                           = x.abs + y.abs
+  def scaleBy(factor: Int): Point          = Point(x * factor, y * factor)
+  def adjacent4: Set[Point]                = AdjacentDeltas.map(_ + this)
+  def adjacent8: Set[Point]                = AdjacentDeltasWithDiagonals.map(_ + this)
 
   def euclideanDistanceTo(other: Point): Double = {
     val dx = x - other.x

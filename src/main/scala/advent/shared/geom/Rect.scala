@@ -1,5 +1,9 @@
 package advent.shared.geom
 
+import scala.language.higherKinds
+import scalaz.{Foldable, Functor}
+import scalaz.Scalaz._
+
 final case class Rect(minX: Int, minY: Int, maxX: Int, maxY: Int) {
   require(minX <= maxX)
   require(minY <= maxY)
@@ -16,10 +20,13 @@ final case class Rect(minX: Int, minY: Int, maxX: Int, maxY: Int) {
     else None
   }
 
+  def xRange: Range.Inclusive = minX to maxX
+  def yRange: Range.Inclusive = minY to maxY
+
   def pointSet: Set[Point] =
     (for {
-      x <- minX to maxX
-      y <- minY to maxY
+      x <- xRange
+      y <- yRange
     } yield Point(x, y)).toSet
 
   def corners: Set[Point] =
@@ -27,4 +34,11 @@ final case class Rect(minX: Int, minY: Int, maxX: Int, maxY: Int) {
       x <- List(minX, maxX)
       y <- List(minY, maxY)
     } yield Point(x, y)).toSet
+}
+
+object Rect {
+  def enclosing[F[_]: Functor: Foldable](points: F[Point]): Option[Rect] = for {
+    (minX, maxX) <- points.map(_.x).extrema
+    (minY, maxY) <- points.map(_.y).extrema
+  } yield Rect(minX, minY, maxX, maxY)
 }

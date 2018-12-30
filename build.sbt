@@ -34,6 +34,7 @@ lazy val root = (project in file(".")).settings(
     )),
   name := "advent-of-code",
   libraryDependencies ++= Seq(
+    "ca.mrvisser"            %% "sealerate"                % "0.0.5",
     "com.lihaoyi"            %% "fastparse"                % "2.0.4",
     "io.spray"               %% "spray-json"               % "1.3.2",
     "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
