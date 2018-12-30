@@ -2,7 +2,7 @@ package advent
 
 import org.scalatest.{FlatSpec, Matchers}
 
-class DayNTest extends FlatSpec with Matchers {
+final class DayNTest extends FlatSpec with Matchers {
 
   "Part 1" should "???" in {
   }
