@@ -4,9 +4,6 @@ import advent.shared.Time.timed
 
 object Day8 {
 
-  type Input     = List[Int]
-  type Parser[A] = Input => (Input, A)
-
   final case class Tree(metadata: List[Int], children: List[Tree] = Nil) {
     def metadataSum: Int = metadata.sum + children.map(_.metadataSum).sum
 
@@ -33,16 +30,15 @@ object Day8 {
               body(numChildren, metadataSize)
           }
           .map {
-            case (children, metadata) =>
-              Tree(metadata.toList, children.toList)
+            case (children, metadata) => Tree(metadata, children)
           }
 
       def header[_: P]: P[(Int, Int)] = P(number ~ number)
 
-      def body[_: P](numChildren: Int, metadataSize: Int): P[(Seq[Tree], Seq[Int])] =
+      def body[_: P](numChildren: Int, metadataSize: Int): P[(List[Tree], List[Int])] =
         P(
-          node.rep(min = numChildren, max = numChildren) ~
-            number.rep(min = metadataSize, max = metadataSize)
+          node.rep(min = numChildren, max = numChildren).map(_.toList) ~
+            number.rep(min = metadataSize, max = metadataSize).map(_.toList)
         )
 
       def number[_: P]: P[Int] = P(CharsWhileIn("0-9").!.map(_.toInt))
